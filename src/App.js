@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import ReactDOM from "react-dom/client";
+import { useState } from "react";
+import Header from "./component/header";
+import Card from "./component/card";
+import Todocontainer from "./component/todocontainer";
+import Login from "./pages.js/Login";
+import Signup from "./pages.js/Signup";
+import LandingPage from "./pages.js/Landing";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
 function App() {
+  const [user, setuser] = useState([
+    {
+      username: "Joel",
+      password: "Abc7",
+    },
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<Login user={user} setuser={setuser} />}
+          ></Route>
+
+          <Route
+            path="/signup"
+            element={<Signup user={user} setuser={setuser} />}
+          ></Route>
+
+          <Route path="/landing" element={<LandingPage />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
+root.render(<App />);
 
 export default App;
